@@ -136,4 +136,4 @@ export PATH="$FSLDIR/bin:$PATH"
 export PATH="$HOME/abin:/usr/lib/lightdm/lightdm:$PATH" # This must be matched by AFNI installation directory
 ```
 
-NOTE: We also provide another example of Environment Variables in ~/.easyfmri/Script/linuxshell.tar.gz
+NOTE: We also provide another example of Environment Variables in `~/.easyfmri/Script/linuxshell.tar.gz`
