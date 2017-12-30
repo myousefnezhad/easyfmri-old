@@ -5,7 +5,7 @@ easy fMRI project (V1.7B1000 beta)
 
 Easy fMRI is an open source toolbox for the Human Brain Mapping and Decoding. This project is developing by [Muhammad Yousefnezhad](https://myousefnezhad.sourceforge.io), [iBRAIN Group](http://ibrain.nuaa.edu.cn), [Nanjing University of Aeronautics and Astronautics](http://iao.nuaa.edu.cn), China.
 
-The project website is https://easyfmri.sourceforge.io/
+The project website is https://easyfmri.sourceforge.io/.
 
 ### Dependencies
 
@@ -20,7 +20,7 @@ Easy fMRI needs following software:
   -[AFNI & SUMA](https://afni.nimh.nih.gov/) (version=17.3.06 or above) for 3D visualization
 
 
-### How install easy fMRI
+### How to install easy fMRI
 
 
 #### STEP A) Copy Files
@@ -50,7 +50,7 @@ For Linux:
 sudo sh Anaconda3-<version>-Linux<platform>.sh
 ```
 
-For Mac: click pkg file and continue installation.
+For Mac: click PKG file and continue installation.
 
 2. Install all packages in `~/.easyfmri/PyPackage` directory
 
@@ -64,7 +64,7 @@ sudo pip install *
 
 #### STEP C) Install FSL 5.0.10 or above
 
-1. Register in [FSL website](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
+1. Register on [FSL website](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
 
 2. Download `fslinstaller.py`
 
@@ -102,9 +102,9 @@ After restarting your computer, open a terminal and run easyfmri:
 ezfmri
 ```
 
-### How upgrade easy fMRI
+### How to upgrade easy fMRI
 
-For updating a new version, just replace the old files by the new files
+For updating a new version, just replace the old files with the new files.
 
 Note: default directory for easy fMRI is a hidden folder in `~/.easyfmri`
 
