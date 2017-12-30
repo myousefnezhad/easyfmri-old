@@ -24,7 +24,7 @@ You need following Software:
 
 
 
-# STEP(A). Copy Files
+#### STEP(A). Copy Files
 
 1. Download the last version of easy fMRI file (a zip file, e.g. easyfmri.zip) and copy it to your home directory.
 
@@ -51,7 +51,7 @@ sudo cp ~/.easyfmri/_Script/ezfmri  /usr/local/bin/
 
 
 
-# STEP(B). Python 3.6.2 or above
+#### STEP(B). Python 3.6.2 or above
 
 1. Download (https://anaconda.org/anaconda/python) and Install Python3 by using Anaconda3
 
@@ -74,7 +74,7 @@ sudo pip install *
 
 
 
-# STEP(C). Install FSL 5.0.10 or above
+#### STEP(C). Install FSL 5.0.10 or above
 
 1. Register from https://fsl.fmrib.ox.ac.uk/fsl/fslwiki
 
@@ -98,7 +98,7 @@ python2 fslinstaller.py -f <downloaded file, e.g. fsl-5.x.x-centosY_64.tar.gz> -
 
 
 
-# STEP(D). Install AFNI 17.3.06 or above
+#### STEP(D). Install AFNI 17.3.06 or above
 
 1. Download AFNI (https://afni.nimh.nih.gov/)
 
@@ -108,7 +108,7 @@ python2 fslinstaller.py -f <downloaded file, e.g. fsl-5.x.x-centosY_64.tar.gz> -
 
 
 
-# STEP(E). Update Environment Variable
+#### STEP(E). Update Environment Variable
 
 1. See the example bellow
 
