@@ -25,24 +25,33 @@ Easy fMRI needs following software:
 
 #### STEP A) Copy Files
 
-1. Download easy fMRI files:
+-- Download easy fMRI files:
+
+From GitHub:
 
 ```
 git clone https://github.com/easyfmri/easyfmri.git ~/.easyfmri
 ```
 
-2. Copy `ezfmri` to `/usr/bin/local`
+From SourceForge:
+
+```
+git clone git://git.code.sf.net/p/easyfmri/code ~/.easyfmri
+```
+
+
+-- Copy `ezfmri` to `/usr/bin/local`
 
 ```
 sudo cp ~/.easyfmri/Script/ezfmri  /usr/local/bin/
 ```
 
-3. Set environment variables (see example at the end)
+-- Set environment variables (see example at the end)
 
 
 #### STEP B) Install Python 3.6.2 or above
 
-1. Download [Anaconda3](https://anaconda.org/anaconda/python) and Install Python3 by using Anaconda3
+-- Download [Anaconda3](https://anaconda.org/anaconda/python) and Install Python3 by using Anaconda3
 
 For Linux:
 
@@ -52,23 +61,23 @@ sudo sh Anaconda3-<version>-Linux<platform>.sh
 
 For Mac: click PKG file and continue installation.
 
-2. Install all packages in `~/.easyfmri/PyPackage` directory
+-- Install all packages in `~/.easyfmri/PyPackage` directory
 
 ```
 cd ~/.easyfmri/PyPackage
 sudo pip install *
 ```
 
-3. Set environment variables (see example at the end)
+-- Set environment variables (see example at the end)
 
 
 #### STEP C) Install FSL 5.0.10 or above
 
-1. Register on [FSL website](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
+-- Register on [FSL website](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki)
 
-2. Download `fslinstaller.py`
+-- Download `fslinstaller.py`
 
-3. Run following for downloading installation file (Mac: `fsl-<version>-macOS_64.tar.gz` or Linux: `fsl-<version>-centos7_64.tar.gz`)
+-- Run following for downloading installation file (Mac: `fsl-<version>-macOS_64.tar.gz` or Linux: `fsl-<version>-centos7_64.tar.gz`)
 
 ```
 python2 fslinstaller.py -o
@@ -76,22 +85,22 @@ md5sum fsl-5.x.x-centosY_64.tar.gz
 ```
 
 
-4. Install the downloaded file:
+-- Install the downloaded file:
 
 ```
 python2 fslinstaller.py -f <downloaded file name, e.g. fsl-5.x.x-centosY_64.tar.gz> -M
 ```
 
-5. Set environment variables (see example at the end)
+-- Set environment variables (see example at the end)
 
 
 #### STEP D) Install AFNI 17.3.06 or above
 
-1. Download [AFNI](https://afni.nimh.nih.gov/)
+-- Download [AFNI](https://afni.nimh.nih.gov/)
 
-2. Extract AFNI to `~/abin`
+-- Extract AFNI to `~/abin`
 
-3. Set environment variables (see example at the end)
+-- Set environment variables (see example at the end)
 
 
 #### STEP E) Run easy fMRI
