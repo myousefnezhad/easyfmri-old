@@ -27,13 +27,13 @@ Easy fMRI needs following software:
 
 -- Download easy fMRI files:
 
-From GitHub:
+From [GitHub](https://github.com/easyfmri/easyfmri):
 
 ```
 git clone https://github.com/easyfmri/easyfmri.git ~/.easyfmri
 ```
 
-From SourceForge:
+From [SourceForge](https://sourceforge.net/p/easyfmri/code/ci/master/tree/):
 
 ```
 git clone git://git.code.sf.net/p/easyfmri/code ~/.easyfmri
