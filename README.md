@@ -3,15 +3,15 @@ easy fMRI project (V1.7B1000 beta)
 
 ### Introduction
 
-easy fMRI is a open source toolbox for the Human Brain Mapping and Decoding. This project is developing by [Muhammad Yousefnezhad](https://myousefnezhad.sourceforge.io), [iBRAIN Group](http://ibrain.nuaa.edu.cn), [Nanjing University of Aeronautics and Astronautics](http://iao.nuaa.edu.cn), China.
+Easy fMRI is an open source toolbox for the Human Brain Mapping and Decoding. This project is developing by [Muhammad Yousefnezhad](https://myousefnezhad.sourceforge.io), [iBRAIN Group](http://ibrain.nuaa.edu.cn), [Nanjing University of Aeronautics and Astronautics](http://iao.nuaa.edu.cn), China.
 
 The project website is https://easyfmri.sourceforge.io/
 
 ### Dependencies
 
-easy fMRI needs following software:
+Easy fMRI needs following software:
 
-  -Platform: Mac or Linux
+  -Platform: Linux, Mac (NOTE: you can use virtual machine for Windows platform)
 
   -[Python3](https://anaconda.org/anaconda/python) (version=3.6.2 or above)
 
@@ -31,7 +31,7 @@ easy fMRI needs following software:
 git clone https://github.com/easyfmri/easyfmri.git ~/.easyfmri
 ```
 
-2. Copy running file to `/usr/bin/local`
+2. Copy `ezfmri` to `/usr/bin/local`
 
 ```
 sudo cp ~/.easyfmri/Script/ezfmri  /usr/local/bin/
@@ -40,7 +40,7 @@ sudo cp ~/.easyfmri/Script/ezfmri  /usr/local/bin/
 3. Set environment variables (see example at the end)
 
 
-#### STEP B) Python 3.6.2 or above
+#### STEP B) Install Python 3.6.2 or above
 
 1. Download [Anaconda3](https://anaconda.org/anaconda/python) and Install Python3 by using Anaconda3
 
@@ -94,11 +94,9 @@ python2 fslinstaller.py -f <downloaded file name, e.g. fsl-5.x.x-centosY_64.tar.
 3. Set environment variables (see example at the end)
 
 
-#### STEP(E). Update Environment Variable
+#### STEP E) Run easy fMRI
 
-1. See the example bellow
-
-2. After restarting your computer, run easyfmri:
+After restarting your computer, open a terminal and run easyfmri:
 
 ```
 ezfmri
@@ -106,9 +104,15 @@ ezfmri
 
 ### How upgrade easy fMRI
 
-For updating a new version, just replace the old files by the extracted new files
+For updating a new version, just replace the old files by the new files
 
-Note: default directory for easy fMRI is a hidden folder in ~/.easyfmri
+Note: default directory for easy fMRI is a hidden folder in `~/.easyfmri`
+
+```
+rm -R ~/.easyfmri
+git clone https://github.com/easyfmri/easyfmri.git ~/.easyfmri
+```
+
 
 ### An example of environment variables
 
@@ -123,7 +127,7 @@ export PATH="/usr/local/bin:$PATH"        # This is for binary file for running 
 export PATH="$HOME/anaconda3/bin:$PATH"   # This must be matched by your anaconda installation directory
 alias python3="python3 -m IPython"
 
-#FSL
+# FSL
 export FSLDIR="/usr/local/fsl"            # This must be matched by FSL installation directory
 . ${FSLDIR}/etc/fslconf/fsl.sh
 export PATH="$FSLDIR/bin:$PATH"
