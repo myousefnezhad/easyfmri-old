@@ -326,7 +326,16 @@ class frmMADeepRSA(Ui_frmMADeepRSA):
             msgBox.exec_()
             return False
 
-
+        try:
+            Alpha = np.float32(ui.txtAlpha.text())
+            if Alpha <= 0:
+                raise Exception
+        except:
+            msgBox.setText("Alpha is wrong!")
+            msgBox.setIcon(QMessageBox.Critical)
+            msgBox.setStandardButtons(QMessageBox.Ok)
+            msgBox.exec_()
+            return False
 
         try:
             Iter = np.int32(ui.txtIter.text())
@@ -670,16 +679,17 @@ class frmMADeepRSA(Ui_frmMADeepRSA):
 
         rsa = DeepRSA(layers=Layers, n_iter=Iter, learning_rate=LearningRate,loss_norm=LossNorm,activation=Activation,\
                       batch_size=BatchSize,report_step=ReportStep,verbose=ui.cbVerbose.isChecked(),\
-                      CPU=ui.cbDevice.currentData())
-        Betas, Eps, Weights, Biases, loss_vec, MSE = rsa.fit(data_vals=X, design_vals=Design)
+                      CPU=ui.cbDevice.currentData(), alpha=Alpha)
+        Betas, Weights, Biases, loss_vec, MSE, Performance = rsa.fit(data_vals=X, design_vals=Design)
 
         OutData["LossVec"] = loss_vec
         OutData["MSE"] = MSE
+        OutData["Performance"] = Performance
+
         print("MSE: %f" % (MSE))
 
         if ui.cbBeta.isChecked():
             OutData["Betas"]    = Betas
-            OutData["Eps"]      = Eps
             OutData["Weights"]  = Weights
             OutData["Biases"]   = Biases
 

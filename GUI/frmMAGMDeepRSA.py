@@ -202,6 +202,17 @@ class frmMAGMDeepRSA(Ui_frmMAGMDeepRSA):
             return False
 
         try:
+            Alpha = np.float32(ui.txtAlpha.text())
+            if Alpha <= 0:
+                raise Exception
+        except:
+            msgBox.setText("Alpha is wrong!")
+            msgBox.setIcon(QMessageBox.Critical)
+            msgBox.setStandardButtons(QMessageBox.Ok)
+            msgBox.exec_()
+            return False
+
+        try:
             BatchSize = np.int32(ui.txtBatch.text())
         except:
             msgBox.setText("Number of batch is wrong!")
@@ -504,6 +515,7 @@ class frmMAGMDeepRSA(Ui_frmMAGMDeepRSA):
         Cov = None
         Corr = None
         AMSE = list()
+        APer = list()
 
         # RSA Method
         OutData['Method'] = dict()
@@ -534,15 +546,16 @@ class frmMAGMDeepRSA(Ui_frmMAGMDeepRSA):
             rsa = DeepRSA(layers=Layers, n_iter=Iter, learning_rate=LearningRate, loss_norm=LossNorm,
                           activation=Activation, \
                           batch_size=BatchSize, report_step=ReportStep, verbose=ui.cbVerbose.isChecked(),\
-                          CPU=ui.cbDevice.currentData())
-            BetaLi, EpsLi, WeightsLi, BiasesLi, loss_vec, MSE = rsa.fit(data_vals=XLi, design_vals=RegLi)
+                          CPU=ui.cbDevice.currentData(), alpha=Alpha)
+            BetaLi, WeightsLi, BiasesLi, loss_vec, MSE, Performance = rsa.fit(data_vals=XLi, design_vals=RegLi)
 
             OutData["LossVec" + str(foldID + 1)] = loss_vec
-            OutData["MSE" + str(foldID)] = MSE
+            OutData["MSE" + str(foldID)]            = MSE
+            OutData["Performance" + str(foldID)]    = Performance
             AMSE.append(MSE)
+            APer.append(Performance)
             if ui.cbBeta.isChecked():
                 OutData["BetaL" + str(foldID + 1)] = BetaLi
-                OutData["EpsL" + str(foldID + 1)]  = EpsLi
                 OutData["WeightsL" + str(foldID + 1)] = WeightsLi
                 OutData["BiasesL" + str(foldID + 1)]  = BiasesLi
 
@@ -596,6 +609,9 @@ class frmMAGMDeepRSA(Ui_frmMAGMDeepRSA):
 
         OutData["MSE"] = np.mean(AMSE)
         OutData["MSE_std"] = np.std(AMSE)
+        OutData["Performance"] = np.mean(APer)
+        OutData["Performance_std"] = np.std(APer)
+
 
         print("Average MSE: %f" % (OutData["MSE"]))
         OutData["RunTime"] = time.time() - tStart
