@@ -33,8 +33,8 @@ class frmMAGMDeepRSA(Ui_frmMAGMDeepRSA):
         ui.tabWidget.setCurrentIndex(0)
 
         # Activation
-        ui.cbActivation.addItem('ReLU', 'relu')
         ui.cbActivation.addItem('Sigmoid', 'sigmoid')
+        ui.cbActivation.addItem('ReLU', 'relu')
         ui.cbActivation.addItem('Tanh', 'tanh')
 
         # LASSO Norm
@@ -203,7 +203,7 @@ class frmMAGMDeepRSA(Ui_frmMAGMDeepRSA):
 
         try:
             Alpha = np.float32(ui.txtAlpha.text())
-            if Alpha <= 0:
+            if Alpha < 0:
                 raise Exception
         except:
             msgBox.setText("Alpha is wrong!")
@@ -520,6 +520,7 @@ class frmMAGMDeepRSA(Ui_frmMAGMDeepRSA):
         # RSA Method
         OutData['Method'] = dict()
         OutData['Method']['Layers'] = ui.txtLayers.text()
+        OutData['Method']['Alpha']  = Alpha
         OutData['Method']['Activation'] = Activation
         OutData['Method']['LossNorm'] = LossNorm
         OutData['Method']['LearningRate'] = LearningRate
@@ -527,6 +528,7 @@ class frmMAGMDeepRSA(Ui_frmMAGMDeepRSA):
         OutData['Method']['BatchSize'] = BatchSize
         OutData['Method']['ReportStep'] = ReportStep
         OutData['Method']['Verbose'] = ui.cbVerbose.isChecked()
+
 
         TotalFolds = len(UniqFold)
 

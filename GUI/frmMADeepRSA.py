@@ -36,8 +36,8 @@ class frmMADeepRSA(Ui_frmMADeepRSA):
         ui.tabWidget.setCurrentIndex(0)
 
         # Activation
-        ui.cbActivation.addItem('ReLU', 'relu')
         ui.cbActivation.addItem('Sigmoid', 'sigmoid')
+        ui.cbActivation.addItem('ReLU', 'relu')
         ui.cbActivation.addItem('Tanh', 'tanh')
 
         # LASSO Norm
@@ -328,8 +328,8 @@ class frmMADeepRSA(Ui_frmMADeepRSA):
 
         try:
             Alpha = np.float32(ui.txtAlpha.text())
-            if Alpha <= 0:
-                raise Exception
+            if Alpha < 0:
+                 raise Exception
         except:
             msgBox.setText("Alpha is wrong!")
             msgBox.setIcon(QMessageBox.Critical)
@@ -668,7 +668,8 @@ class frmMADeepRSA(Ui_frmMADeepRSA):
         print("Running Deep RSA ...")
         # RSA Method
         OutData['Method'] = dict()
-        OutData['Method']['Layers'] = ui.txtLayers.text()
+        OutData['Method']['Layers']         = ui.txtLayers.text()
+        OutData['Method']['Alpha']          = Alpha
         OutData['Method']['Activation']     = Activation
         OutData['Method']['LossNorm']       = LossNorm
         OutData['Method']['LearningRate']   = LearningRate

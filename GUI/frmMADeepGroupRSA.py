@@ -33,8 +33,8 @@ class frmMADeepGroupRSA(Ui_frmMADeepGroupRSA):
         ui.tabWidget.setCurrentIndex(0)
 
         # Activation
-        ui.cbActivation.addItem('ReLU', 'relu')
         ui.cbActivation.addItem('Sigmoid', 'sigmoid')
+        ui.cbActivation.addItem('ReLU', 'relu')
         ui.cbActivation.addItem('Tanh', 'tanh')
 
         # LASSO Norm

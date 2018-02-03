@@ -38,6 +38,7 @@ class DeepRSA:
         F = tf.placeholder("float", [None, np.shape(data_vals)[1]])
         D = tf.placeholder(shape=[None, np.shape(design_vals)[1]], dtype=tf.float32)
         Beta = tf.Variable(tf.random_normal(shape=[np.shape(design_vals)[1], self.Layers[-1]]))
+        #Eps  = tf.Variable(tf.random_normal(shape=[1, self.Layers[-1]]))
         oldBeta = tf.placeholder(shape=[np.shape(design_vals)[1], self.Layers[-1]], dtype=tf.float32)
         # Kernel Optimization
         MappedF = tf.placeholder("float", [None, self.Layers[-1]])
@@ -47,8 +48,8 @@ class DeepRSA:
         kernel_train = tf.train.AdamOptimizer(learning_rate=self.learning_rate).minimize(kernel_loss)
         # RSA optimization
         l1_term = tf.multiply(tf.constant(self.alpha,dtype=tf.float32), tf.reduce_mean(tf.abs(Beta)))
-        l2_term = tf.multiply(tf.constant(self.alpha,dtype=tf.float32), tf.reduce_mean(tf.square(Beta)))
-        rsa_loss = tf.add(tf.add(tf.square(tf.norm(tf.subtract(MappedF,tf.matmul(D, Beta)), ord=self.loss_norm)),l1_term),l2_term)
+        l2_term = tf.multiply(tf.constant(-10 * self.alpha,dtype=tf.float32), tf.reduce_mean(tf.square(Beta)))
+        rsa_loss = tf.add(tf.add(tf.square(tf.norm(tf.subtract(MappedF, tf.matmul(D, Beta)), ord=self.loss_norm)),l1_term),l2_term)
         rsa_train = tf.train.GradientDescentOptimizer(learning_rate=self.learning_rate).minimize(rsa_loss)
         # Performance Estimation mean((F - D * Beta)**2) / n
         perf  = tf.divide(tf.reduce_mean(tf.square(MappedF - tf.matmul(D, Beta))), tf.constant(np.shape(data_vals)[0],dtype=tf.float32))
