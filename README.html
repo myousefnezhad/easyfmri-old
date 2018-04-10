@@ -1,0 +1,227 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Untitled Document.md</title><script type="text/javascript">
+//<![CDATA[
+window.__cfRocketOptions = {byc:0,p:0,petok:"991437689aae00a4c85453f421d0f581ef4b5e98-1523348501-1800"};
+//]]>
+</script>
+<script type="text/javascript" src="https://ajax.cloudflare.com/cdn-cgi/scripts/935cb224/cloudflare-static/rocket.min.js"></script>
+<style></style></head><body id="preview">
+<h1><a id="easy_fMRI_project_V18B4200_beta_0"></a>easy fMRI project (V1.8B4200 beta)</h1>
+<h3><a id="Introduction_3"></a>Introduction</h3>
+<p>Easy fMRI is an open source toolbox for the Human Brain Mapping and Decoding. This project is developing by <a href="https://myousefnezhad.sourceforge.io">Muhammad Yousefnezhad</a>, <a href="http://ibrain.nuaa.edu.cn">iBRAIN Group</a>, <a href="http://iao.nuaa.edu.cn">Nanjing University of Aeronautics and Astronautics</a>, China.</p>
+<p>The project website is <a href="https://easyfmri.github.io/">https://easyfmri.github.io/</a> or <a href="https://easyfmri.sourceforge.io/">https://easyfmri.sourceforge.io/</a>.</p>
+<h3><a id="Dependencies_9"></a>Dependencies</h3>
+<p>Easy fMRI needs following software:</p>
+<p>-Platform: Linux (recommended), Mac, Windows (via Linux Virtual Machine, or Bash for Windows 10 or above)</p>
+<p>-<a href="https://anaconda.org/anaconda/python">Python3</a> (version=3.6.2 or above)</p>
+<p>-<a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki">FSL</a> (version=5.0.10 or above) for preprocessing steps</p>
+<p>-<a href="https://afni.nimh.nih.gov/">AFNI &amp; SUMA</a> (version=17.3.06 or above) for 3D visualization</p>
+<p>-<a href="https://developer.nvidia.com/cuda-toolkit">CUDA</a> for GPU-based algorithms</p>
+<p>-<a href="https://developer.nvidia.com/cudnn">CUDNN</a> for GPU-based algorithms</p>
+<p>-<a href="https://www.tensorflow.org/install/">Tensorflow</a> for Gradient-based Optimization and Learning</p>
+<h3><a id="How_to_install_easy_fMRI_28"></a>How to install easy fMRI</h3>
+<h3><a id="Preinstall_for_Windows_10_users_30"></a>Pre-install for Windows 10 users:</h3>
+<p>– Install Windows Subsystem for Linux <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">https://docs.microsoft.com/en-us/windows/wsl/install-win10</a></p>
+<p>NOTE: You have to install UBUNTU Linux from Windows Store.</p>
+<p>– Install Xming X Server for Windows: <a href="https://sourceforge.net/projects/xming/files/latest/download">https://sourceforge.net/projects/xming/files/latest/download</a></p>
+<p>– Open command prompt (press Windows key + R, then in run window type <code>cmd</code> and press enter)</p>
+<p>– Open bash via cmd:</p>
+<pre><code>bash
+</code></pre>
+<p>– Set Display:</p>
+<pre><code>echo &quot;export DISPLAY=:0.0&quot; &gt;&gt; ~/.profile
+source ~/.profile
+</code></pre>
+<p>Now you can install easy fMRI same as a linux system</p>
+<h4><a id="STEP_A_Copy_Files_55"></a>STEP A) Copy Files</h4>
+<p>– Download easy fMRI files:</p>
+<p>From <a href="https://github.com/easyfmri/easyfmri">GitHub</a>:</p>
+<pre><code>git clone https://github.com/easyfmri/easyfmri.git ~/.easyfmri
+</code></pre>
+<p>From <a href="https://sourceforge.net/p/easyfmri/code/ci/master/tree/">SourceForge Git</a>:</p>
+<pre><code>git clone git://git.code.sf.net/p/easyfmri/code ~/.easyfmri
+</code></pre>
+<p>From <a href="https://sourceforge.net/projects/easyfmri/files/">SourceForge</a> as a zip file</p>
+<pre><code>unzip easyfMRI.&lt;version&gt;.zip
+mv easyfmri .easyfmri
+</code></pre>
+<p>– Copy <code>ezfmri</code> to <code>/usr/bin/local</code></p>
+<pre><code>cd ~/.easyfmri/Script
+./cp_script
+</code></pre>
+<p>– Set environment variables (see example at the end)</p>
+<h4><a id="STEP_B_Install_FSL_5010_or_above_88"></a>STEP B) Install FSL 5.0.10 or above</h4>
+<p>– Register on <a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki">FSL website</a></p>
+<p>– Download <code>fslinstaller.py</code></p>
+<p>– Run following for downloading installation file (e.g. In version 5.0.10, the file name is <code>fsl-5.0.10-macOS_64.tar.gz</code> for Mac or <code>fsl-5.0.10-centos7_64.tar.gz</code> for all Linux distribution)</p>
+<p>For Linux:</p>
+<pre><code>python2 fslinstaller.py -o
+md5sum fsl-5.0.10-centos7_64.tar.gz
+</code></pre>
+<p>For Mac:</p>
+<pre><code>python2 fslinstaller.py -o
+md5sum fsl-5.0.10-macOS_64.tar.gz
+</code></pre>
+<p>– Install the downloaded file:</p>
+<p>For Linux:</p>
+<pre><code>python2 fslinstaller.py -f fsl-5.0.10-centos7_64.tar.gz -M
+</code></pre>
+<p>For Mac:</p>
+<pre><code>python2 fslinstaller.py -f fsl-5.0.10-macOS_64.tar.gz -M
+</code></pre>
+<p>– Set environment variables (see example at the end)</p>
+<h4><a id="STEP_D_Install_AFNI_17306_or_above_128"></a>STEP D) Install AFNI 17.3.06 or above</h4>
+<p>– Download <a href="https://afni.nimh.nih.gov/">AFNI</a></p>
+<p>– Extract AFNI to <code>~/abin</code></p>
+<p>– Set environment variables (see example at the end)</p>
+<p>NOTE: For Ubuntu-based Linux, you have to install following packages:</p>
+<pre><code>sudo apt-get install -y tcsh xfonts-base python-qt4 gsl-bin netpbm gnome-tweak-tool libjpeg62 xvfb xterm vim curl
+
+sudo apt-get install -y libglu1-mesa-dev libglw1-mesa libxm4 build-essential
+</code></pre>
+<h4><a id="STEP_D_Install_Python_36x_144"></a>STEP D) Install Python 3.6.x</h4>
+<p>– Download <a href="https://anaconda.org/anaconda/python">Anaconda3</a> and Install Python3 by using Anaconda3</p>
+<p>For Linux:</p>
+<pre><code>sh Anaconda3-&lt;version&gt;-Linux&lt;platform&gt;.sh
+</code></pre>
+<p>For Mac: click PKG file and continue installation.</p>
+<p>– Set environment variables (see example at the end)</p>
+<p>– Install all packages in <code>~/.easyfmri/PyPackage</code> directory</p>
+<pre><code>cd ~/.easyfmri/PyPackage
+pip install *
+</code></pre>
+<p>– Install MPI packages:</p>
+<pre><code>conda install mpi4py
+</code></pre>
+<p>– Install Tensorflow package:</p>
+<p>For CPU version:</p>
+<pre><code>pip install tensorflow
+</code></pre>
+<p>For GPU Vesion: You must install <a href="https://developer.nvidia.com/cuda-toolkit">CUDA</a> and <a href="https://developer.nvidia.com/cudnn">CuDNN</a>. Then, you can install <a href="https://www.tensorflow.org/install/">Tensorflow</a></p>
+<p>Note: By employing <code>CUDA 9.0</code>, <code>CUDNN 7.0</code> and <code>Ubuntu 16.04.x</code>, you can use following command to install tensorflow:</p>
+<pre><code>pip install tensorflow-gpu
+</code></pre>
+<h4><a id="STEP_E_Run_easy_fMRI_188"></a>STEP E) Run easy fMRI</h4>
+<p>After restarting your computer, open a terminal and run easyfmri:</p>
+<pre><code>ezfmri
+</code></pre>
+<h3><a id="How_to_upgrade_easy_fMRI_196"></a>How to upgrade easy fMRI</h3>
+<p>For updating a new version, just replace the old files with the new files.</p>
+<p>Note: default directory for easy fMRI is a hidden folder in <code>~/.easyfmri</code></p>
+<pre><code>rm -R ~/.easyfmri
+git clone https://github.com/easyfmri/easyfmri.git ~/.easyfmri
+</code></pre>
+<h3><a id="An_example_of_environment_variables_208"></a>An example of environment variables</h3>
+<p>You can install this script automatically as follows:</p>
+<p>For Linux:</p>
+<pre><code>cd ~/.easyfmri/Script
+./install_script_linux
+</code></pre>
+<p>For Mac:</p>
+<pre><code>cd ~/.easyfmri/Script
+./install_script_mac
+</code></pre>
+<p>Or just copy following to in <code>.profile</code> or <code>.bashrc</code> and restart your computer</p>
+<pre><code>######################################
+# Enable (&quot;1&quot;) or Disable (&quot;0&quot;) features #
+######################################
+export EN_EZFMRI=&quot;1&quot;
+export EN_PYTHON=&quot;1&quot;
+export EN_PYTHON_ALIAS=&quot;1&quot;
+export EN_AFNI=&quot;1&quot;
+export EN_FSL=&quot;1&quot;
+export EN_CUDA=&quot;1&quot;
+export EN_BASH=&quot;1&quot;
+export EN_MC=&quot;1&quot;
+export EN_COLOR=&quot;1&quot;
+######################################
+# Directories                        #
+######################################
+export INSTALL_DIR=&quot;$HOME&quot;      # Base dir for Anaconda, easy fMRI, and AFNI
+export FSLDIR=&quot;/usr/local/fsl&quot;  # for FSL 5.0.10
+export ANACON_PATH=&quot;$INSTALL_DIR/anaconda3/bin&quot;
+export AFNI_PATH=&quot;$INSTALL_DIR/abin&quot;
+export CUDA_HOME=&quot;/usr/local/cuda&quot;
+# export FSLDIR=&quot;/usr/share/fsl/5.0&quot; # for FSL 5.0.9
+# export DISPLAY=:0.0 # Enable for Windows 10
+######################################
+# Scripts                            #
+######################################
+
+######## Easy fMRI
+if (( $EN_EZFMRI != &quot;0&quot; )); then
+  export EASYFMRI=&quot;$INSTALL_DIR/.easyfmri&quot;
+fi
+######## Python
+if (( $EN_PYTHON != &quot;0&quot; )); then
+  export PATH=&quot;$ANACON_PATH:$PATH&quot;
+fi
+if (( $EN_PYTHON_ALIAS != &quot;0&quot; )); then
+  alias python=&quot;python -m IPython&quot;
+  alias python3=&quot;python -m IPython&quot;
+fi
+######## AFNI
+if (( $EN_AFNI != &quot;0&quot; )); then
+  export DYLD_LIBRARY_PATH=/opt/X11/lib/flat_namespace
+  export DYLD_FALLBACK_LIBRARY_PATH=&quot;$HOME/abin&quot;
+  export PATH=&quot;/usr/local/bin:$AFNI_PATH:$PATH&quot;
+fi
+####### FSL
+if (( $EN_FSL != &quot;0&quot; )); then
+  . $FSLDIR/etc/fslconf/fsl.sh
+  export PATH=&quot;$FSLDIR/bin:$PATH&quot;
+fi
+####### CUDA
+if (( $EN_CUDA != &quot;0&quot; )); then
+  export DYLD_LIBRARY_PATH=&quot;$DYLD_LIBRARY_PATH:$CUDA_HOME/lib&quot;
+  export LD_LIBRARY_PATH=&quot;$DYLD_LIBRARY_PATH:$CUDA_HOME/lib:/usr/local/cuda/lib64/&quot;
+  export PATH=&quot;$CUDA_HOME/bin:$PATH&quot;
+fi
+####### BASH
+if (( $EN_BASH != &quot;0&quot; )); then
+  [ -f /usr/local/etc/bash_completion ] &amp;&amp; . /usr/local/etc/bash_completion
+fi
+####### MC
+if (( $EN_MC != &quot;0&quot; )); then
+  alias mc=&quot;. /usr/local/opt/midnight-commander/libexec/mc/mc-wrapper.sh&quot;
+fi
+####### BASH COLOR
+if (( $EN_COLOR != &quot;0&quot; )); then
+  # Define Colors
+  C_DEFAULT=&quot;\[\033[m\]&quot;
+  C_WHITE=&quot;\[\033[1m\]&quot;
+  C_BLACK=&quot;\[\033[30m\]&quot;
+  C_RED=&quot;\[\033[31m\]&quot;
+  C_GREEN=&quot;\[\033[32m\]&quot;
+  C_YELLOW=&quot;\[\033[33m\]&quot;
+  C_BLUE=&quot;\[\033[34m\]&quot;
+  C_PURPLE=&quot;\[\033[35m\]&quot;
+  C_CYAN=&quot;\[\033[36m\]&quot;
+  C_LIGHTGRAY=&quot;\[\033[37m\]&quot;
+  C_DARKGRAY=&quot;\[\033[1;30m\]&quot;
+  C_LIGHTRED=&quot;\[\033[1;31m\]&quot;
+  C_LIGHTGREEN=&quot;\[\033[1;32m\]&quot;
+  C_LIGHTYELLOW=&quot;\[\033[1;33m\]&quot;
+  C_LIGHTBLUE=&quot;\[\033[1;34m\]&quot;
+  C_LIGHTPURPLE=&quot;\[\033[1;35m\]&quot;
+  C_LIGHTCYAN=&quot;\[\033[1;36m\]&quot;
+  C_BG_BLACK=&quot;\[\033[40m\]&quot;
+  C_BG_RED=&quot;\[\033[41m\]&quot;
+  C_BG_GREEN=&quot;\[\033[42m\]&quot;
+  C_BG_YELLOW=&quot;\[\033[43m\]&quot;
+  C_BG_BLUE=&quot;\[\033[44m\]&quot;
+  C_BG_PURPLE=&quot;\[\033[45m\]&quot;
+  C_BG_CYAN=&quot;\[\033[46m\]&quot;
+  C_BG_LIGHTGRAY=&quot;\[\033[47m\]&quot;
+  # Set Terminal Colors
+  export CLICOLOR=1
+  export LSCOLORS=GxacCxDxBxegedabagaced
+  alias ls='ls -GFh'
+  export PS1=&quot;\n$C_LIGHTPURPLE\<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="700554332f34353631253c2430">[email&#160;protected]</a>$C_LIGHTCYAN\h$C_DEFAULT:$C_LIGHTBLUE\W$C_DEFAULT\$$C_LIGHTYELLOW &quot;
+  if (( $EUID != 0 )); then
+    export LSCOLORS=GxacCxDxBxegedabagaced
+    export PS1=&quot;\n$C_LIGHTGREEN\<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c49187f6378797a7d6970687c">[email&#160;protected]</a>$C_LIGHTCYAN\h$C_DEFAULT:$C_LIGHTBLUE\W$C_DEFAULT\$$C_LIGHTYELLOW &quot;
+  fi
+fi
+</code></pre>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/d07b1474/cloudflare-static/email-decode.min.js"></script></body></html>
